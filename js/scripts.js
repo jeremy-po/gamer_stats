@@ -12,9 +12,8 @@ function setupHomePage() {
         {
             id: 'apex-legends',
             name: 'Apex Legends',
-            description: 'Track player stats, leaderboards, and performance!',
+            description: 'Track player stats!',
         },
-
         {
             id: 'lol',
             name: 'League of Legends',
@@ -23,22 +22,24 @@ function setupHomePage() {
     ];
 
     const gameCardsContainer = document.querySelector('#game-cards');
-    games.forEach((game) => {
-        const card = document.createElement('div');
-        card.classList.add('game-card');
-        card.id = game.id;
+    if (gameCardsContainer) {
+        games.forEach(game => {
+            const card = document.createElement('div');
+            card.classList.add('game-card');
+            card.id = game.id;
 
-        const button = document.createElement('button');
-        button.textContent = 'View Stats';
-        button.onclick = () => viewGame(game.id);
+            const button = document.createElement('button');
+            button.textContent = 'View Stats';
+            button.onclick = () => viewGame(game.id);
 
-        card.innerHTML = `
-            <h2>${game.name}</h2>
-            <p>${game.description}</p>
-        `;
-        card.appendChild(button);
-        gameCardsContainer.appendChild(card);
-    });
+            card.innerHTML = `
+                <h2>${game.name}</h2>
+                <p>${game.description}</p>
+            `;
+            card.appendChild(button);
+            gameCardsContainer.appendChild(card);
+        });
+    }
 }
 
 function viewGame(gameId) {
@@ -49,7 +50,5 @@ function viewGame(gameId) {
 
     if (gamePages[gameId]) {
         window.location.href = gamePages[gameId];
-    } else {
-        console.error('Page for the selected game is not available.');
     }
 }
