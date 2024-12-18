@@ -1,6 +1,3 @@
-const API_KEY = 'RGAPI-0741e357-0169-4426-8bef-0052103a7eaa';
-const API_URL = 'https://na1.api.riotgames.com/lol'; 
-
 async function fetchSummonerData(summonerName) {
     const response = await fetch('/.netlify/functions/riotProxy', {
         method: 'POST',
