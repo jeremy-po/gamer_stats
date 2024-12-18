@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Legends Player Stats</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+    <header id="header-placeholder"></header>
+
+    <main>
+        <section id="apex-legends-stats">
+            <h1>Apex Legends Player Stats</h1>
+
+            <div class="search-container">
+                <input type="text" placeholder="Enter Player Name" />
+                <select name="platform">
+                    <option value="PC">PC (Origin or Steam)</option>
+                    <option value="PS4">PlayStation 4/5</option>
+                    <option value="X1">Xbox</option>
+                </select>
+                <button>Search</button>
+            </div>
+
+            <div id="results" class="results-container">
+                <!-- Player stats will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer-placeholder"></footer>
+    <script src="js/scripts.js" type="module"></script>
+    <script src="js/apex-legends.js" type="module" defer></script>
+</body>
+</html>
