@@ -13,11 +13,7 @@ function setupHomePage() {
             id: 'apex-legends',
             name: 'Apex Legends',
             description: 'Track player stats!',
-        },
-        {
-            id: 'lol',
-            name: 'League of Legends',
-            description: 'Review summoner stats, and more!',
+            image: 'public/images/logos/Apex_legends_cover.jpg' 
         },
     ];
 
@@ -33,6 +29,7 @@ function setupHomePage() {
             button.onclick = () => viewGame(game.id);
 
             card.innerHTML = `
+                <img src="${game.image}" alt="${game.name}" class="game-card-image" /> <!-- Game Image -->
                 <h2>${game.name}</h2>
                 <p>${game.description}</p>
             `;
@@ -45,7 +42,6 @@ function setupHomePage() {
 function viewGame(gameId) {
     const gamePages = {
         'apex-legends': 'apex-legends.html',
-        'lol': 'lol.html',
     };
 
     if (gamePages[gameId]) {
