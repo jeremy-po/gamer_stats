@@ -1,5 +1,5 @@
 async function fetchSummonerData(summonerName) {
-    const response = await fetch('/riotProxy', {
+    const response = await fetch('/functions/riotProxy', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
