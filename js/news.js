@@ -1,33 +1,24 @@
-async function fetchNews() {
-    const apiKey = '3709a8279c124c67ae6f2ae3df06cb40';  
-    try {
-        const response = await fetch(`https://newsapi.org/v2/everything?q=gaming&apiKey=${apiKey}`);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+async function fetchGNews() {
+    const apiKey = '0fb84af188d3aa4c47985c9f355505ca';
+    const response = await fetch(`https://gnews.io/api/v4/search?q=gaming&token=${apiKey}`);
 
-        const data = await response.json();
-        const articles = data.articles;
-        displayNews(articles);
-    } catch (error) {
-        displayError('Error fetching news. Please try again later.');
-        console.error('Error fetching news:', error);
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
     }
+
+    const data = await response.json();
+    const articles = data.articles;
+    displayNews(articles);
 }
 
 function displayNews(articles) {
     const newsContainer = document.getElementById('news-articles');
-    newsContainer.innerHTML = ''; 
+    newsContainer.innerHTML = '';
 
-    const filteredArticles = articles.filter(article => {
-        return !(article.title.includes("[Removed]") || article.description.includes("[Removed]"));
-    });
-
-    if (filteredArticles.length === 0) {
+    if (articles.length === 0) {
         newsContainer.innerHTML = '<p>No news available at the moment.</p>';
     } else {
-        filteredArticles.forEach(article => {
+        articles.forEach(article => {
             const articleElement = createArticleElement(article);
             newsContainer.appendChild(articleElement);
         });
@@ -47,14 +38,10 @@ function createArticleElement(article) {
     return articleDiv;
 }
 
-function displayError(message) {
-    const newsContainer = document.getElementById('news-articles');
-    newsContainer.innerHTML = `<p class="error">${message}</p>`;
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    fetchNews()
+    fetchGNews()
         .catch(error => {
-            displayError('Failed to load news: ' + error.message);
+            const newsContainer = document.getElementById('news-articles');
+            newsContainer.innerHTML = `<p class="error">Failed to load news: ${error.message}</p>`;
         });
 });
