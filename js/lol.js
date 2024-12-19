@@ -1,5 +1,5 @@
 async function fetchSummonerData(summonerName) {
-    const response = await fetch('/gamer_stats/functions/riotProxy', {
+    const response = await fetch('/.netlify/functions/riotProxy', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
