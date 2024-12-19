@@ -1,14 +1,19 @@
 async function fetchNews() {
     const apiKey = '3709a8279c124c67ae6f2ae3df06cb40';  
-    const response = await fetch(`https://newsapi.org/v2/everything?q=gaming&apiKey=${apiKey}`);
-    
-    if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+    try {
+        const response = await fetch(`https://newsapi.org/v2/everything?q=gaming&apiKey=${apiKey}`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-    const data = await response.json();
-    const articles = data.articles;
-    displayNews(articles);
+        const data = await response.json();
+        const articles = data.articles;
+        displayNews(articles);
+    } catch (error) {
+        displayError('Error fetching news. Please try again later.');
+        console.error('Error fetching news:', error);
+    }
 }
 
 function displayNews(articles) {
@@ -42,10 +47,14 @@ function createArticleElement(article) {
     return articleDiv;
 }
 
+function displayError(message) {
+    const newsContainer = document.getElementById('news-articles');
+    newsContainer.innerHTML = `<p class="error">${message}</p>`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchNews()
         .catch(error => {
-            const newsContainer = document.getElementById('news-articles');
-            newsContainer.innerHTML = `<p class="error">Failed to load news: ${error.message}</p>`;
+            displayError('Failed to load news: ' + error.message);
         });
 });
